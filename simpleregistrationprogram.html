@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Registration Form</title>
+</head>
+<body>
+
+    <h2>Simple Registration Form</h2>
+
+    <table border="0" cellpadding="10">
+        <tr>
+            <td><label>Name:</label></td>
+            <td><input type="text" id="nameInput" oninput="checkForm()" placeholder="Enter your name"></td>
+            <td><p id="nameError" style="color: red; margin: 0;"></p></td>
+        </tr>
+        <tr>
+            <td><label>Email:</label></td>
+            <td><input type="text" id="emailInput" oninput="checkForm()"placeholder="Enter your Email id"></td>
+            <td><p id="emailError" style="color: red; margin: 0;"></p></td>
+        </tr>
+        <tr>
+            <td><label>Password:</label></td>
+            <td><input type="password" id="passwordInput" oninput="checkForm()" placeholder="password min 6 char"></td>
+            <td><p id="passwordError" style="color: red; margin: 0;"></p></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button id="submitBtn" disabled onclick="success()">Submit</button></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script>
+        function checkForm() {
+            var nameValue = document.getElementById("nameInput").value;
+            var emailValue = document.getElementById("emailInput").value;
+            var passwordValue = document.getElementById("passwordInput").value;
+            var isNameOk = false;
+            var isEmailOk = false;
+            var isPasswordOk = false;
+            if (nameValue === "") {
+                document.getElementById("nameError").innerText = "Name is required";
+            } else {
+                document.getElementById("nameError").innerText = "";
+                isNameOk = true;
+            }
+            if (emailValue.includes("@") && emailValue.includes(".")) {
+                document.getElementById("emailError").innerText = "";
+                isEmailOk = true;
+            } else {
+                document.getElementById("emailError").innerText = "Invalid email format";
+            }
+            if (passwordValue.length >= 6) {
+                document.getElementById("passwordError").innerText = "";
+                isPasswordOk = true;
+            } else {
+                document.getElementById("passwordError").innerText = "Password is too short (min 6 characters)";
+            }
+            if (isNameOk && isEmailOk && isPasswordOk) {
+                document.getElementById("submitBtn").disabled = false;
+            } else {
+                document.getElementById("submitBtn").disabled = true;
+            }
+        }
+        function success() {
+            alert("Registration successful!");
+        }
+    </script>
+
+</body>
+</html>
